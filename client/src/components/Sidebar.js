@@ -14,6 +14,9 @@ const Sidebar = () => {
       </h1>
       <CreateProject visible={visible} setVisible={setVisible} />
       <ProjectsList visible={visible} />
+      <button className="mt-auto px-4 py-2 text-white font-body font-semibold bg-red-700 hover:bg-red-800 rounded-lg transition-colors duration-300 ease-in">
+        Sign Out
+      </button>
     </aside>
   );
 };
