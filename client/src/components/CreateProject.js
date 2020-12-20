@@ -1,9 +1,7 @@
-import { useState } from 'react';
+import PropTypes from 'prop-types';
 
-const CreateProject = () => {
-  // local state
-  const [visible, setVisible] = useState(false);
-
+const CreateProject = ({ visible, setVisible }) => {
+  // handle visible property of input
   const handleVisible = () => {
     setVisible(!visible);
   };
@@ -26,6 +24,11 @@ const CreateProject = () => {
       />
     </div>
   );
+};
+
+CreateProject.propTypes = {
+  visible: PropTypes.bool.isRequired,
+  setVisible: PropTypes.func.isRequired
 };
 
 export default CreateProject;

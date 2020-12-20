@@ -1,6 +1,10 @@
-const ProjectsList = () => {
+const ProjectsList = ({ visible }) => {
   return (
-    <div className="mt-10 font-body">
+    <div
+      className={`mt-10 font-body transform transition-transform ease-in duration-300 ${
+        !visible ? '-translate-y-16' : 'translate-y-0'
+      }`}
+    >
       <p className="text-gray-800 font-display font-extrabold uppercase">
         Projects
       </p>
