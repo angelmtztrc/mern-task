@@ -1,9 +1,8 @@
+// routers
+import MainRouter from './routers/MainRouter';
+
 function App() {
-  return (
-    <div>
-      <h1>Hello World!</h1>
-    </div>
-  );
+  return <MainRouter />;
 }
 
 export default App;
