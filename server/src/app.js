@@ -4,7 +4,7 @@ import morgan from 'morgan';
 import database from './config/database';
 
 // routes
-import UsersRoutes from './routes/users';
+import UsersRoutes from './routes/users.routes';
 
 // load env variables
 dotenv.config();
