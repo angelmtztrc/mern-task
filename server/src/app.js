@@ -26,9 +26,9 @@ app.use('/api/authentication', AuthenticationRoutes());
 
 // error handler
 app.use((error, req, res, next) => {
-  if (!error.statusCode) error.statusCode = 500;
+  const statusCode = error.statusCode || 500;
 
-  return res.status(error.statusCode).json({ type: 'fail', error: error.toString() });
+  return res.status(statusCode).json({ type: 'fail', error: error.toString() });
 });
 
 export default app;
