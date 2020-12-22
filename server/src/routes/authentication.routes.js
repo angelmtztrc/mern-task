@@ -6,9 +6,10 @@ const router = Router();
 
 // middlewares
 import checkBody from '../middlewares/checkBody';
+import checkToken from '../middlewares/checkToken';
 
 // controllers
-import { authenticate } from '../controllers/authentication.controller';
+import { authenticate, refresh } from '../controllers/authentication.controller';
 
 export default function AuthenticationRoutes() {
   router.post(
@@ -20,6 +21,8 @@ export default function AuthenticationRoutes() {
     ],
     authenticate
   );
+
+  router.get('/refresh', checkToken, refresh);
 
   return router;
 }
