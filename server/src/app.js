@@ -1,5 +1,8 @@
 const express = require('express');
 
+// load env variables
+require('dotenv').config();
+
 // create an express application
 const app = express();
 
