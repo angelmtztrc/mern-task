@@ -5,6 +5,7 @@ import database from './config/database';
 
 // routes
 import UsersRoutes from './routes/users.routes';
+import AuthenticationRoutes from './routes/authentication.routes';
 
 // load env variables
 dotenv.config();
@@ -21,6 +22,7 @@ app.use(express.json());
 
 // routes
 app.use('/api/users', UsersRoutes());
+app.use('/api/authentication', AuthenticationRoutes());
 
 // error handler
 app.use((error, req, res, next) => {

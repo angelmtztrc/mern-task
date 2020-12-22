@@ -8,18 +8,17 @@ const router = Router();
 import checkBody from '../middlewares/checkBody';
 
 // controllers
-import { create } from '../controllers/user.controller';
+import { authenticate } from '../controllers/authentication.controller';
 
-export default function UserRoutes() {
+export default function AuthenticationRoutes() {
   router.post(
     '/',
     [
-      body('name', 'Name is required').notEmpty(),
       body('email', 'Insert a valid email').isEmail(),
       body('password', 'Password must have 6 or more characters ').isLength({ min: 6 }),
       checkBody
     ],
-    create
+    authenticate
   );
 
   return router;
