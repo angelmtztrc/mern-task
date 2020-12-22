@@ -10,7 +10,9 @@ const Login = () => {
         <div className="mb-3 w-full">
           <input
             type="email"
+            name="email"
             placeholder="Your email..."
+            autoComplete="off"
             className="block px-4 py-2 w-full border-2 border-gray-300 focus:border-gray-800 rounded-lg focus:outline-none outline-none appearance-none transition-colors duration-300 ease-in"
           />
           <p className="mt-0 text-right text-red-400 text-sm italic">
@@ -20,7 +22,9 @@ const Login = () => {
         <div className="mb-4 w-full">
           <input
             type="password"
+            name="password"
             placeholder="Your password..."
+            autoComplete="off"
             className="block px-4 py-2 w-full border-2 border-gray-300 focus:border-gray-800 rounded-lg focus:outline-none outline-none appearance-none transition-colors duration-300 ease-in"
           />
           <p className="mt-0 text-right text-red-400 text-sm italic">
