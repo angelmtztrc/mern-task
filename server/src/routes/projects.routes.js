@@ -9,7 +9,7 @@ import checkBody from '../middlewares/checkBody';
 import checkToken from '../middlewares/checkToken';
 
 // controllers
-import { create, getAll, remove } from '../controllers/project.controller';
+import { create, getAll, remove, update } from '../controllers/project.controller';
 
 export default function ProjectRoutes() {
   // all routes are private
@@ -22,6 +22,7 @@ export default function ProjectRoutes() {
   router.get('/', getAll);
 
   // update a project
+  router.put('/:id', [body('title', 'Title is required').notEmpty(), checkBody], update);
 
   // delete a project
   router.delete('/:id', remove);
