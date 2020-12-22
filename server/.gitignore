@@ -3,3 +3,6 @@
 
 # .env for develop environment
 /.env
+
+# server build
+/dist
