@@ -1,14 +1,16 @@
 import express from 'express';
 import dotenv from 'dotenv';
 
+// routes
+import usersRoutes from './routes/users';
+
 // load env variables
 dotenv.config();
 
 // create an express application
 const app = express();
 
-app.use('/', (req, res) => {
-  res.send('Hello world!');
-});
+// routes
+app.use('/api/users', usersRoutes());
 
 export default app;
