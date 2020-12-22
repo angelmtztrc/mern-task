@@ -35,3 +35,36 @@ export const getAll = async (req, res, next) => {
     return next(error);
   }
 };
+
+export const remove = async (req, res, next) => {
+  const { user } = req;
+  const { id } = req.params;
+
+  try {
+    // check if the project exists
+    const project = await Project.findById(id);
+    if (!project) {
+      const error = new Error('Project not found');
+      error.statusCode = 404;
+      return next(error);
+    }
+
+    // check if the user is the creator of the project
+    if (project.creator.toString() !== user.id) {
+      const error = new Error("You don't have authorization");
+      error.statusCode = 401;
+      return next(error);
+    }
+
+    // delete the project
+    await Project.findByIdAndRemove(id);
+
+    // return the response
+    res.status(200).json({
+      type: 'success',
+      data: 'Project deleted successfully'
+    });
+  } catch (error) {
+    return next(error);
+  }
+};
