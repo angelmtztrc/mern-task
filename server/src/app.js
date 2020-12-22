@@ -6,6 +6,7 @@ import database from './config/database';
 // routes
 import UsersRoutes from './routes/users.routes';
 import AuthenticationRoutes from './routes/authentication.routes';
+import ProjectRoutes from './routes/projects.routes';
 
 // load env variables
 dotenv.config();
@@ -23,6 +24,7 @@ app.use(express.json());
 // routes
 app.use('/api/users', UsersRoutes());
 app.use('/api/authentication', AuthenticationRoutes());
+app.use('/api/projects', ProjectRoutes());
 
 // error handler
 app.use((error, req, res, next) => {
