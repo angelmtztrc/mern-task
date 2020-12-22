@@ -8,12 +8,7 @@ Steps to run this project. (pending)
 
 ## This project use
 
-- JavaScript
-- ReactJS
-- Redux
-- Express
-- Mongoose
-- JWT
+JavaScript - ReactJS - Redux - Tailwind CSS - react-beautiful-dnd - Express - Mongoose - JWT - Babel
 
 ## Contributing
 
