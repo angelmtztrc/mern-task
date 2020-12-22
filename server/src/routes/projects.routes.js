@@ -6,12 +6,16 @@ const router = Router();
 
 // middlewares
 import checkBody from '../middlewares/checkBody';
+import checkToken from '../middlewares/checkToken';
 
 // controllers
 import { create } from '../controllers/project.controller';
 
 export default function ProjectRoutes() {
-  router.post('/', [body('name', 'Name is required').notEmpty(), checkBody], create);
+  // all routes are private
+  router.use(checkToken);
+
+  router.post('/', [body('title', 'Title is required').notEmpty(), checkBody], create);
 
   return router;
 }
