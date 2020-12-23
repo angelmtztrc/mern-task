@@ -6,6 +6,11 @@ const TaskSchema = Schema({
     trim: true,
     required: true
   },
+  status: {
+    type: String,
+    trim: true,
+    enum: ['TODO', 'IN PROGRESS', 'COMPLETED']
+  },
   project: {
     type: Schema.Types.ObjectId,
     ref: 'Project'
