@@ -9,7 +9,7 @@ import checkBody from '../middlewares/checkBody';
 import checkToken from '../middlewares/checkToken';
 
 // controllers
-import { create, getAllByProject } from '../controllers/task.controller';
+import { create, getAllByProject, remove } from '../controllers/task.controller';
 
 export default function TaskRoutes() {
   // all routes are private
@@ -31,6 +31,9 @@ export default function TaskRoutes() {
 
   // get all task of a project
   router.get('/', getAllByProject);
+
+  // delete task
+  router.delete('/:id', remove);
 
   return router;
 }
