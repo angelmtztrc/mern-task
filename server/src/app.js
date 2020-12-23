@@ -4,7 +4,7 @@ import morgan from 'morgan';
 import database from './config/database';
 import swaggerUI from 'swagger-ui-express';
 import swaggerJsdoc from 'swagger-jsdoc';
-import swaggerOptions from './swagger.json';
+import SwaggerConfig from './config/swagger';
 
 // routes
 import UsersRoutes from './routes/users.routes';
@@ -24,17 +24,17 @@ database();
 // middlewares
 app.use(morgan('dev'));
 app.use(express.json());
-app.use(
-  '/api/docs',
-  swaggerUI.serve,
-  swaggerUI.setup(swaggerJsdoc(swaggerOptions), { explorer: true })
-);
+app.use(express.urlencoded({ extended: true }));
 
 // routes
 app.use('/api/users', UsersRoutes());
 app.use('/api/authentication', AuthenticationRoutes());
 app.use('/api/projects', ProjectRoutes());
 app.use('/api/tasks', TaskRoutes());
+
+// Swagger
+const specs = swaggerJsdoc(SwaggerConfig);
+app.use('/api/docs', swaggerUI.serve, swaggerUI.setup(specs, { explorer: true }));
 
 // error handler
 app.use((error, req, res, next) => {
