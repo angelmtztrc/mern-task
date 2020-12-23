@@ -4,11 +4,11 @@ It is a full-stack project that allows you to manage projects and tasks.
 
 ## Setting up
 
-Steps to run this project. (pending)
+If you want to run this project, check the `README.md` files inside each folder.
 
-## This project use
+## Project built with
 
-JavaScript - ReactJS - Redux - Tailwind CSS - react-beautiful-dnd - Express - Mongoose - JWT - Babel
+JavaScript - ReactJS - Redux - Tailwind CSS - react-beautiful-dnd - Express - Mongoose - JWT - Babel - Argon2
 
 ## Contributing
 
