@@ -1,35 +1,73 @@
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 import { Link } from 'react-router-dom';
 
 const Login = () => {
+  const formik = useFormik({
+    initialValues: {
+      email: '',
+      password: ''
+    },
+    validationSchema: Yup.object({
+      email: Yup.string()
+        .email('Insert a valid email')
+        .required('Email is required'),
+      password: Yup.string()
+        .required('Password is required')
+        .min(6, `The password must have at least 6 characters`)
+    }),
+    onSubmit: values => {
+      console.log(values);
+    }
+  });
+
   return (
     <div className="px-6 py-4 w-full max-w-sm bg-white rounded-lg shadow">
       <h1 className="text-center text-gray-800 font-display text-3xl font-extrabold">
         Sign In
       </h1>
-      <form className="mt-5">
+      <form onSubmit={formik.handleSubmit} className="mt-5">
         <div className="mb-3 w-full">
           <input
+            value={formik.values.email}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             type="email"
             name="email"
             placeholder="Your email..."
             autoComplete="off"
-            className="block px-4 py-2 w-full border-2 border-gray-300 focus:border-gray-800 rounded-lg focus:outline-none outline-none appearance-none transition-colors duration-300 ease-in"
+            className={`${
+              formik.touched.email && formik.errors.email
+                ? 'border-red-500'
+                : ''
+            } block px-4 py-2 w-full border-2 border-gray-300 focus:border-gray-800 rounded-lg focus:outline-none outline-none appearance-none transition-colors duration-300 ease-in`}
           />
-          <p className="mt-0 text-right text-red-400 text-sm italic">
-            Insert a valid email
-          </p>
+          {formik.touched.email && formik.errors.email ? (
+            <p className="mt-0 text-right text-red-400 text-sm italic">
+              {formik.errors.email}
+            </p>
+          ) : null}
         </div>
         <div className="mb-4 w-full">
           <input
+            value={formik.values.password}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             type="password"
             name="password"
             placeholder="Your password..."
             autoComplete="off"
-            className="block px-4 py-2 w-full border-2 border-gray-300 focus:border-gray-800 rounded-lg focus:outline-none outline-none appearance-none transition-colors duration-300 ease-in"
+            className={`${
+              formik.touched.password && formik.errors.password
+                ? 'border-red-500'
+                : ''
+            } block px-4 py-2 w-full border-2 border-gray-300 focus:border-gray-800 rounded-lg focus:outline-none outline-none appearance-none transition-colors duration-300 ease-in`}
           />
-          <p className="mt-0 text-right text-red-400 text-sm italic">
-            Password is required
-          </p>
+          {formik.touched.password && formik.errors.password ? (
+            <p className="mt-0 text-right text-red-400 text-sm italic">
+              {formik.errors.password}
+            </p>
+          ) : null}
         </div>
         <button className="block px-4 py-2 w-full text-white font-bold bg-gray-800 hover:bg-gray-900 rounded-lg focus:outline-none transition-colors duration-300 ease-in">
           Sign In
