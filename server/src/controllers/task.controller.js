@@ -37,3 +37,34 @@ export const create = async (req, res, next) => {
     return next(error);
   }
 };
+
+export const getAllByProject = async (req, res, next) => {
+  const { project } = req.query;
+  try {
+    // check if the project exists
+    const projectExists = await Project.findById(project);
+    if (!projectExists) {
+      const error = new Error('Project not found');
+      error.statusCode = 404;
+      return next(error);
+    }
+
+    // check if the user is the owner of the project
+    if (projectExists.creator.toString() !== user.id) {
+      const error = new Error("You don't have authorization");
+      error.statusCode = 401;
+      return next(error);
+    }
+
+    // get all task of the project
+    const tasks = await Task.find({ project }).sort({ createAt: -1 });
+
+    // return the response
+    res.status(200).json({
+      type: 'success',
+      data: tasks || []
+    });
+  } catch (error) {
+    return next(error);
+  }
+};
