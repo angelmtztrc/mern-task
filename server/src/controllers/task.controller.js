@@ -70,6 +70,48 @@ export const getAllByProject = async (req, res, next) => {
   }
 };
 
+export const update = async (req, res, next) => {
+  const { user } = req;
+  const { id } = req.params;
+  const { description, status } = req.body;
+
+  try {
+    // check if the task exists
+    let task = await Task.findById(id);
+    if (!task) {
+      const error = new Error('Task not found');
+      error.statusCode = 404;
+      return next(error);
+    }
+
+    // check if project exist
+    const projectExists = await Project.findById(task.project);
+    if (!projectExists) {
+      const error = new Error('Project not found');
+      error.statusCode = 404;
+      return next(error);
+    }
+
+    // check if the user is the owner of the project
+    if (projectExists.creator.toString() !== user.id) {
+      const error = new Error("You don't have authorization");
+      error.statusCode = 401;
+      return next(error);
+    }
+
+    // update the task
+    task = await Task.findByIdAndUpdate(id, { description, status }, { new: true });
+
+    // return the response
+    res.status(200).json({
+      type: 'success',
+      data: task
+    });
+  } catch (error) {
+    return next(error);
+  }
+};
+
 export const remove = async (req, res, next) => {
   const { user } = req;
   const { id } = req.params;

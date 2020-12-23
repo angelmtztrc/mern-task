@@ -9,7 +9,7 @@ import checkBody from '../middlewares/checkBody';
 import checkToken from '../middlewares/checkToken';
 
 // controllers
-import { create, getAllByProject, remove } from '../controllers/task.controller';
+import { create, getAllByProject, remove, update } from '../controllers/task.controller';
 
 export default function TaskRoutes() {
   // all routes are private
@@ -31,6 +31,19 @@ export default function TaskRoutes() {
 
   // get all task of a project
   router.get('/', getAllByProject);
+
+  // update a task
+  router.put(
+    '/:id',
+    [
+      body('description', 'Description is required').notEmpty(),
+      body('status', 'Status is required')
+        .isIn(['TODO', 'IN PROGRESS', 'COMPLETED'])
+        .withMessage('Insert a valid status'),
+      checkBody
+    ],
+    update
+  );
 
   // delete task
   router.delete('/:id', remove);
