@@ -2,8 +2,6 @@ import express from 'express';
 import dotenv from 'dotenv';
 import morgan from 'morgan';
 import database from './config/database';
-import swaggerUi from 'swagger-ui-express';
-import swaggerDocument from './config/swagger.json';
 
 // routes
 import UsersRoutes from './routes/users.routes';
@@ -30,9 +28,6 @@ app.use('/api/users', UsersRoutes());
 app.use('/api/authentication', AuthenticationRoutes());
 app.use('/api/projects', ProjectRoutes());
 app.use('/api/tasks', TaskRoutes());
-
-// Swagger
-app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, { explorer: true }));
 
 // error handler
 app.use((error, req, res, next) => {
