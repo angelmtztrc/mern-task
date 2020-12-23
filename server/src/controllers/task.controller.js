@@ -57,7 +57,7 @@ export const getAllByProject = async (req, res, next) => {
     }
 
     // get all task of the project
-    const tasks = await Task.find({ project }).sort({ createAt: -1 });
+    const tasks = await Task.find({ project }).sort({ createdAt: -1 });
 
     // return the response
     res.status(200).json({

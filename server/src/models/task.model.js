@@ -15,7 +15,7 @@ const TaskSchema = Schema({
     type: Schema.Types.ObjectId,
     ref: 'Project'
   },
-  createAt: {
+  createdAt: {
     type: Date,
     default: Date.now()
   }
