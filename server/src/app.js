@@ -2,6 +2,9 @@ import express from 'express';
 import dotenv from 'dotenv';
 import morgan from 'morgan';
 import database from './config/database';
+import swaggerUI from 'swagger-ui-express';
+import swaggerJsdoc from 'swagger-jsdoc';
+import swaggerOptions from './swagger.json';
 
 // routes
 import UsersRoutes from './routes/users.routes';
@@ -21,6 +24,11 @@ database();
 // middlewares
 app.use(morgan('dev'));
 app.use(express.json());
+app.use(
+  '/api/docs',
+  swaggerUI.serve,
+  swaggerUI.setup(swaggerJsdoc(swaggerOptions), { explorer: true })
+);
 
 // routes
 app.use('/api/users', UsersRoutes());
