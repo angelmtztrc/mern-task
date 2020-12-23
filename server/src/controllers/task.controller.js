@@ -39,6 +39,7 @@ export const create = async (req, res, next) => {
 };
 
 export const getAllByProject = async (req, res, next) => {
+  const { user } = req;
   const { project } = req.query;
   try {
     // check if the project exists

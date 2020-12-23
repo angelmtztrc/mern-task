@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { body } from 'express-validator';
+import { body, query } from 'express-validator';
 
 // create router
 const router = Router();
@@ -9,7 +9,7 @@ import checkBody from '../middlewares/checkBody';
 import checkToken from '../middlewares/checkToken';
 
 // controllers
-import { create } from '../controllers/task.controller';
+import { create, getAllByProject } from '../controllers/task.controller';
 
 export default function TaskRoutes() {
   // all routes are private
@@ -28,6 +28,9 @@ export default function TaskRoutes() {
     ],
     create
   );
+
+  // get all task of a project
+  router.get('/', getAllByProject);
 
   return router;
 }
