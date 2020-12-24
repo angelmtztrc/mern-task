@@ -1,11 +1,17 @@
+import { useSelector } from 'react-redux';
+
 const Project = () => {
+  // extract values from the state
+  const { active } = useSelector(state => state.projects);
+
+  // object destructuring
+  const { title } = active;
+
   return (
     <main className="flex flex-col col-span-10 bg-gray-100">
       <header className="flex flex-col items-center h-80 font-display bg-gray-800">
         <div className="w-full max-w-xl text-center">
-          <h1 className="mb-5 mt-20 text-white text-5xl font-bold">
-            MERN Task
-          </h1>
+          <h1 className="mb-5 mt-20 text-white text-5xl font-bold">{title}</h1>
           <div className="relative w-full">
             <input
               type="text"
