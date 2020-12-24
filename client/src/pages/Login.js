@@ -1,8 +1,16 @@
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+
+// actions
+import { authenticateAction } from '../redux/actions/AuthActions';
 
 const Login = () => {
+  // dispatch
+  const dispatch = useDispatch();
+
+  // handle the data of the form
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -17,7 +25,7 @@ const Login = () => {
         .min(6, `The password must have at least 6 characters`)
     }),
     onSubmit: values => {
-      console.log(values);
+      dispatch(authenticateAction(values));
     }
   });
 
