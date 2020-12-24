@@ -1,12 +1,15 @@
 // constants
+import AxiosInstance from '../../config/axios';
 import { AUTH_USER_INIT } from '../../constants';
 
 export const authenticateAction = credentials => {
-  return dispatch => {
+  return async dispatch => {
     // initialize the action
     dispatch(authenticateInit());
     try {
-      console.log(credentials);
+      const response = await AxiosInstance.post('users/', credentials);
+      console.log(response);
+
       // make the request
     } catch (error) {
       console.log(error);
