@@ -1,9 +1,9 @@
 import { useSelector } from 'react-redux';
+import ProjectsListItem from './ProjectsListItem';
 
 const ProjectsList = ({ visible }) => {
   // access to the state values
-  // const { projects } = useSelector(state => state.projects);
-  // console.log(projects);
+  const { projects } = useSelector(state => state.projects);
 
   return (
     <div
@@ -15,15 +15,9 @@ const ProjectsList = ({ visible }) => {
         Projects
       </p>
       <ul className="flex flex-col mt-4 space-y-1">
-        <li className="inline-block pl-2 text-gray-600 hover:text-gray-900 font-bold border-l-2 border-gray-800 cursor-pointer transition-colors duration-300 ease-in">
-          MERN Task
-        </li>
-        <li className="inline-block pl-2 text-gray-600 hover:text-gray-900 font-bold border-l-2 hover:border-gray-800 cursor-pointer transition-colors duration-300 ease-in">
-          Jurassic World API
-        </li>
-        <li className="inline-block pl-2 text-gray-600 hover:text-gray-900 font-bold border-l-2 hover:border-gray-800 cursor-pointer transition-colors duration-300 ease-in">
-          Patient Manager
-        </li>
+        {projects.map(project => (
+          <ProjectsListItem key={project._id} project={project} />
+        ))}
       </ul>
     </div>
   );

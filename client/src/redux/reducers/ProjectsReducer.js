@@ -11,7 +11,7 @@ import {
 const initialState = {
   loading: false,
   projects: [],
-  project: null
+  active: null
 };
 
 export default function ProjectsReducer(state = initialState, action) {
