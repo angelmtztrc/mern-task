@@ -55,7 +55,22 @@ const authenticateFail = () => ({
 });
 
 export const checkAuthAction = () => {
-  return async dispatch => {};
+  return async dispatch => {
+    dispatch(checkAuthInit());
+    try {
+      // make the request
+      const { data } = await AxiosInstance.get('authentication/refresh');
+
+      // send token to local storage
+      localStorage.setItem('x-auth-token', data.data.token);
+      localStorage.setItem('x-auth-token-init', new Date().getTime());
+
+      // save user in the store
+      dispatch(checkAuthSuccess(data.data.user));
+    } catch (error) {
+      dispatch(checkAuthFail());
+    }
+  };
 };
 
 const checkAuthInit = () => ({

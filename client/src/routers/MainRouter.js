@@ -1,26 +1,33 @@
 import { useEffect } from 'react';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect
-} from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 // containers
 import PrivateRoute from '../containers/PrivateRoute';
 import PublicRoute from '../containers/PublicRoute';
 
+// components
+import Loading from '../components/Loading';
+
 // pages
 import Dashboard from '../pages/Dashboard';
 import Register from '../pages/Register';
 import Login from '../pages/Login';
 
+// actions
+import { checkAuthAction } from '../redux/actions/AuthActions';
+
 const MainRouter = () => {
   const dispatch = useDispatch();
-  const { user } = useSelector(state => state.authentication);
+  const { user, loading } = useSelector(state => state.authentication);
 
-  useEffect(() => {}, [dispatch]);
+  useEffect(() => {
+    dispatch(checkAuthAction());
+  }, [dispatch]);
+
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <Router>
