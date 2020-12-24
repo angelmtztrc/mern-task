@@ -4,7 +4,8 @@ import {
   CREATE_PROJECT_SUCCESS,
   GET_PROJECTS_FAIL,
   GET_PROJECTS_INIT,
-  GET_PROJECTS_SUCCESS
+  GET_PROJECTS_SUCCESS,
+  SET_PROJECT_SUCCESS
 } from '../../constants';
 
 // initial state
@@ -33,6 +34,11 @@ export default function ProjectsReducer(state = initialState, action) {
         ...state,
         loading: false,
         projects: [...action.payload]
+      };
+    case SET_PROJECT_SUCCESS:
+      return {
+        ...state,
+        active: state.projects.find(project => project._id === action.payload)
       };
     case CREATE_PROJECT_FAIL:
     case GET_PROJECTS_FAIL:
