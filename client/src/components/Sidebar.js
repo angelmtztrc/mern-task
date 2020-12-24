@@ -1,11 +1,23 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+
+// actions
+import { getProjectsAction } from '../redux/actions/ProjectsActions';
 
 // components
 import CreateProject from './CreateProject';
 import ProjectsList from './ProjectsList';
 
 const Sidebar = () => {
+  const dispatch = useDispatch();
+
+  // handle the input
   const [visible, setVisible] = useState(false);
+
+  // load all of the projects of the user
+  useEffect(() => {
+    dispatch(getProjectsAction());
+  }, [dispatch]);
 
   return (
     <aside className="flex flex-col col-span-2 px-8 py-6 text-gray-800">

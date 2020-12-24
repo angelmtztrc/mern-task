@@ -1,4 +1,10 @@
+import { useSelector } from 'react-redux';
+
 const ProjectsList = ({ visible }) => {
+  // access to the state values
+  // const { projects } = useSelector(state => state.projects);
+  // console.log(projects);
+
   return (
     <div
       className={`mt-10 font-body transform transition-transform ease-in duration-300 ${
