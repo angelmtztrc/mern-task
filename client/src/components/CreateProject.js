@@ -23,7 +23,7 @@ const CreateProject = ({ visible, setVisible }) => {
     }),
     onSubmit: values => {
       dispatch(createProjectAction(values));
-      // formik.resetForm();
+      formik.resetForm();
     }
   });
 
