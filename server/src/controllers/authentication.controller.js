@@ -55,6 +55,10 @@ export const refresh = async (req, res, next) => {
   res.status(200).json({
     type: 'success',
     data: {
+      user: {
+        id: user.id,
+        name: user.name
+      },
       token
     }
   });
