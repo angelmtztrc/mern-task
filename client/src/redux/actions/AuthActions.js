@@ -7,7 +7,10 @@ import AxiosInstance from '../../config/axios';
 import {
   AUTH_USER_FAIL,
   AUTH_USER_INIT,
-  AUTH_USER_SUCCESS
+  AUTH_USER_SUCCESS,
+  CHECK_USER_FAIL,
+  CHECK_USER_INIT,
+  CHECK_USER_SUCCESS
 } from '../../constants';
 
 export const authenticateAction = credentials => {
@@ -49,4 +52,21 @@ const authenticateSuccess = user => ({
 
 const authenticateFail = () => ({
   type: AUTH_USER_FAIL
+});
+
+export const checkAuthAction = () => {
+  return async dispatch => {};
+};
+
+const checkAuthInit = () => ({
+  type: CHECK_USER_INIT
+});
+
+const checkAuthSuccess = user => ({
+  type: CHECK_USER_SUCCESS,
+  payload: user
+});
+
+const checkAuthFail = () => ({
+  type: CHECK_USER_FAIL
 });
