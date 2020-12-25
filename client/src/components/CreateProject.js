@@ -9,11 +9,6 @@ import { createProjectAction } from '../redux/actions/ProjectsActions';
 const CreateProject = ({ visible, setVisible }) => {
   const dispatch = useDispatch();
 
-  // handle visible property of input
-  const handleVisible = () => {
-    setVisible(!visible);
-  };
-
   const formik = useFormik({
     initialValues: {
       title: ''
@@ -23,9 +18,15 @@ const CreateProject = ({ visible, setVisible }) => {
     }),
     onSubmit: values => {
       dispatch(createProjectAction(values));
-      formik.resetForm();
+      handleVisible();
     }
   });
+
+  // handle visible property of input
+  const handleVisible = () => {
+    setVisible(!visible);
+    formik.resetForm();
+  };
 
   return (
     <form onSubmit={formik.handleSubmit} className="w-full">
