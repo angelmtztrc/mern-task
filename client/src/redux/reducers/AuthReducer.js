@@ -5,7 +5,8 @@ import {
   AUTH_USER_SUCCESS,
   CHECK_USER_FAIL,
   CHECK_USER_INIT,
-  CHECK_USER_SUCCESS
+  CHECK_USER_SUCCESS,
+  SIGN_OUT_SUCCESS
 } from '../../constants';
 
 // initial state
@@ -25,6 +26,12 @@ export default function AuthReducer(state = initialState, action) {
         ...state,
         loading: false,
         user: { ...action.payload }
+      };
+    case SIGN_OUT_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        user: null
       };
     case AUTH_USER_FAIL:
       return {

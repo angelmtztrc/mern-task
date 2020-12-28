@@ -10,7 +10,8 @@ import {
   AUTH_USER_SUCCESS,
   CHECK_USER_FAIL,
   CHECK_USER_INIT,
-  CHECK_USER_SUCCESS
+  CHECK_USER_SUCCESS,
+  SIGN_OUT_SUCCESS
 } from '../../constants';
 
 export const authenticateAction = credentials => {
@@ -84,4 +85,17 @@ const checkAuthSuccess = user => ({
 
 const checkAuthFail = () => ({
   type: CHECK_USER_FAIL
+});
+
+export const signOutAction = () => {
+  return dispatch => {
+    dispatch(signOutSuccess());
+    // remove the items from local storage
+    localStorage.removeItem('x-auth-token');
+    localStorage.removeItem('x-auth-token-init');
+  };
+};
+
+const signOutSuccess = () => ({
+  type: SIGN_OUT_SUCCESS
 });
