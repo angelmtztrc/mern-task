@@ -30,6 +30,9 @@ export const authenticateAction = credentials => {
 
       // save user in the store
       dispatch(authenticateSuccess(data.data.user));
+
+      // set the token in headers
+      AxiosInstance.defaults.headers.common['x-auth-token'] = data.data.token;
     } catch (error) {
       dispatch(authenticateFail());
       Swal.fire({
@@ -68,8 +71,16 @@ export const checkAuthAction = () => {
 
       // save user in the store
       dispatch(checkAuthSuccess(data.data.user));
+
+      // set the token in headers
+      AxiosInstance.defaults.headers.common['x-auth-token'] = data.data.token;
     } catch (error) {
       dispatch(checkAuthFail());
+      // remove token from headers
+      delete AxiosInstance.defaults.headers.common['x-auth-token'];
+      // remove the items from local storage
+      localStorage.removeItem('x-auth-token');
+      localStorage.removeItem('x-auth-token-init');
     }
   };
 };
@@ -93,6 +104,9 @@ export const signOutAction = () => {
     // remove the items from local storage
     localStorage.removeItem('x-auth-token');
     localStorage.removeItem('x-auth-token-init');
+
+    // remove token from headers
+    delete AxiosInstance.defaults.headers.common['x-auth-token'];
   };
 };
 
