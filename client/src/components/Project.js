@@ -1,11 +1,21 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+
+// actions
+import { removeProjectAction } from '../redux/actions/ProjectsActions';
 
 const Project = () => {
+  // call the actions
+  const dispatch = useDispatch();
+
   // extract values from the state
   const { active } = useSelector(state => state.projects);
 
   // object destructuring
-  const { title } = active;
+  const { _id, title } = active;
+
+  const handleRemove = () => {
+    dispatch(removeProjectAction(_id));
+  };
 
   return (
     <main className="flex flex-col col-span-10 bg-gray-100">
@@ -56,6 +66,7 @@ const Project = () => {
         </div>
       </div>
       <button
+        onClick={handleRemove}
         type="button"
         className="flex items-center self-end mb-2 mr-2 mt-5 px-4 py-2 text-white font-body bg-gray-800 rounded-lg uppercase"
       >

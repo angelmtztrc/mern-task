@@ -8,7 +8,10 @@ import {
   CREATE_PROJECT_SUCCESS,
   GET_PROJECTS_INIT,
   GET_PROJECTS_SUCCESS,
-  GET_PROJECTS_FAIL
+  GET_PROJECTS_FAIL,
+  REMOVE_PROJECT_INIT,
+  REMOVE_PROJECT_SUCCESS,
+  REMOVE_PROJECT_FAIL
 } from '../../constants';
 
 // action - create project
@@ -77,4 +80,53 @@ const getProjectsSuccess = projects => ({
 });
 const getProjectsFail = () => ({
   type: GET_PROJECTS_FAIL
+});
+
+// action - get project
+export const removeProjectAction = id => {
+  return async dispatch => {
+    dispatch(removeProjectInit());
+
+    try {
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then(async result => {
+        if (result.isConfirmed) {
+          // make the request
+          const { data } = await AxiosInstance.delete(`projects/${id}`);
+
+          // show success operation alert
+          Swal.fire('Deleted!', data.data, 'success');
+
+          // save projects in the state
+          dispatch(removeProjectSuccess(id));
+        }
+      });
+    } catch (error) {
+      dispatch(removeProjectFail());
+      Swal.fire({
+        title: 'Oops...',
+        text: error.response.data.error,
+        icon: 'error',
+        confirmButtonText: 'Try again'
+      });
+    }
+  };
+};
+
+const removeProjectInit = () => ({
+  type: REMOVE_PROJECT_INIT
+});
+const removeProjectSuccess = id => ({
+  type: REMOVE_PROJECT_SUCCESS,
+  payload: id
+});
+const removeProjectFail = () => ({
+  type: REMOVE_PROJECT_FAIL
 });
