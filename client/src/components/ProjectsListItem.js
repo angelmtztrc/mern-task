@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 
 // actions
-import { setProjectAction } from '../redux/actions/AuthActions';
+import { setProjectAction } from '../redux/actions/ProjectsActions';
 
 const ProjectsListItem = ({ project }) => {
   // object destructuring

@@ -10,8 +10,7 @@ import {
   AUTH_USER_SUCCESS,
   CHECK_USER_FAIL,
   CHECK_USER_INIT,
-  CHECK_USER_SUCCESS,
-  SET_PROJECT_SUCCESS
+  CHECK_USER_SUCCESS
 } from '../../constants';
 
 export const authenticateAction = credentials => {
@@ -85,16 +84,4 @@ const checkAuthSuccess = user => ({
 
 const checkAuthFail = () => ({
   type: CHECK_USER_FAIL
-});
-
-// set active project
-export const setProjectAction = id => {
-  return dispatch => {
-    dispatch(setProjectSuccess(id));
-  };
-};
-
-const setProjectSuccess = id => ({
-  type: SET_PROJECT_SUCCESS,
-  payload: id
 });

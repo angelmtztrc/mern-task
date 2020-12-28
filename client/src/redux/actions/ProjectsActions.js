@@ -11,7 +11,8 @@ import {
   GET_PROJECTS_FAIL,
   REMOVE_PROJECT_INIT,
   REMOVE_PROJECT_SUCCESS,
-  REMOVE_PROJECT_FAIL
+  REMOVE_PROJECT_FAIL,
+  SET_PROJECT_SUCCESS
 } from '../../constants';
 
 // action - create project
@@ -80,6 +81,18 @@ const getProjectsSuccess = projects => ({
 });
 const getProjectsFail = () => ({
   type: GET_PROJECTS_FAIL
+});
+
+// action - set active project
+export const setProjectAction = id => {
+  return dispatch => {
+    dispatch(setProjectSuccess(id));
+  };
+};
+
+const setProjectSuccess = id => ({
+  type: SET_PROJECT_SUCCESS,
+  payload: id
 });
 
 // action - get project
